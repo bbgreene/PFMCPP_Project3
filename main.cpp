@@ -35,51 +35,51 @@ Sub Object 1: Steering Wheel
     Name 4 things you'll find on the:    Steering Wheel
         1) paddle shifters
         2) 'cruise control' controls
-        3) 
-        4) 
+        3) car horn
+        4) window wiper controls
     Name 2 things you can do with the:   Steering Wheel
         1) adjust cruise control settings.
-        2)
+        2) activate the car horn
         
 Sub Object 2: Instrument Cluster
     Name 4 things you'll find on the:   Instrument Cluster
-        1)
-        2)
-        3)
-        4)
+        1) mileage counter
+        2) fuel gauge 
+        3) speedometer
+        4) tachometer
     Name 3 things you can do with the:   Instrument Cluster
-        1)
-        2)
-        3)
+        1) check distance travelled
+        2) check fuel amount
+        3) measure speed of car
     
 Sub Object 3: Environment Controls
     Name 3 things you'll find on the:    Environment Controls
-        1)
-        2)
-        3)
+        1) temperature controls
+        2) AC activation button
+        3) fan level
     Name 3 things you can do with the:   Environment Controls
-        1)
-        2)
-        3)
+        1) adjust the temperature inside car
+        2) turn the AC off or on
+        3) adjust the amount of moving air produced by fan
 
 Sub Object 4: Infotainment System
     Name 3 things you'll find on the:    Infotainment System
-        1)
-        2)
-        3)
+        1) speaker volume control
+        2) on/off toggle switch for system
+        3) radio channel scan button
     Name 3 things you can do with the:   Infotainment System
-        1)
-        2)
-        3)
+        1) adjust speaker volume
+        2) switch infotainment system On
+        3) scan for radio channels
 
 Sub Object 5: Seat 
     Name 3 things you'll find on the:    Seat
-        1)
-        2)
-        3)
+        1) seat belt
+        2) seat horizontal position adjuster
+        3) seat back angle position adjuster
     Name 2 things you can do with the:   Seat
-        1)
-        2)
+        1) adjust horizontal position of seat
+        2) adjust angle of seat back
 */
 /*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
