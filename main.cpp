@@ -57,9 +57,9 @@ Thing 1) Laptop
 5 properties:
     1) number of letter keys
     2) number of numeric keys
-    3) stores amount of binary information
+    3) amount of binary information in hard disk
     4) number of usb ports
-    5) stores amount of electricity needed for portable use
+    5) amount of electricity needed for portable use
 3 things it can do:
     1) transfer information from usb device to hard disk
     2) automatically adjust display brightness
@@ -71,7 +71,7 @@ Thing 2) MIDI Keyboard
 5 properties:
     1) number of white keys
     2) number of black keys
-    3) stores amount of user presets
+    3) amount of user presets
     4) number of velocity sensitive pads
     5) number of encoders
 3 things it can do:
@@ -85,7 +85,7 @@ Thing 3) Hardware Synthesiser
 5 properties:
     1) number of filters
     2) number of audio outputs
-    3) stores amount of electricity 
+    3) amount of waveform types 
     4) number of LFOs
     5) number of envelopes
 3 things it can do:
@@ -99,7 +99,7 @@ Thing 4) House Plant
 5 properties:
     1) number of roots
     2) number of leaves
-    3) stores amount of water in roots
+    3) amount of water in roots
     4) number of flowers
     5) number of ladybirds living on it per day
 3 things it can do:
