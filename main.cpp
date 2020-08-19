@@ -108,17 +108,17 @@ Thing 4) House Plant
  */
 
 /*
-Thing 10)
+Thing 10) VST Sampler 
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) Waveform display
+    2) Control panel display
+    3) Filter
+    4) Envelope
+    5) LFO
 3 things it can do:
-    1)
-    2)
-    3)
+    1) display waveform of an audio sample 
+    2) playback audio at various speeds
+    3) effect frequency content of audio
  */
 
 /*
