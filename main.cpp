@@ -129,73 +129,73 @@ Thing 4) House Plant
  */
 
 /*
-Thing 5)
+Thing 5) Waveform display
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) Length of sample in ms 
+    2) Height in pixels 
+    3) Width in pixels
+    4) Zoom function as a percentage
+    5) Loop hightlight colour
 3 things it can do:
-    1)
-    2)
-    3)
+    1) display transient positions of digital audio signal 
+    2) display playback head position
+    3) display user defined loops points of sample
  */
 
 /*
-Thing 6)
+Thing 6) Control panel display
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) Height in pixels
+    2) Width in pixels 
+    3) Number of parameters
+    4) Parameter knob size in pixels
+    5) Button size in pixels
 3 things it can do:
-    1)
-    2)
-    3)
+    1) change amplitude of waveform in the waveform display
+    2) display automation changes of a parameter
+    3) manipulate loop length of sample in the waveform display
  */
 
 /*
-Thing 7)
+Thing 7) Filter
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) Frequency cutoff in Hz
+    2) Resonance as a percentage
+    3) Filter type selection
+    4) Distortion amount in dB
+    5) Key tracker
 3 things it can do:
-    1)
-    2)
-    3)
+    1) affect frequency content of audio
+    2) distort frequency content of audio
+    3) adjust frequency cutoff of filter based on user MIDI note value input
  */
 
 /*
-Thing 8)
+Thing 8) Envelope
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) Attack time in ms
+    2) Decay time in ms
+    3) Sustain level in dB
+    4) Release time in ms
+    5) Amount of MIDI velocity level as a percentage
 3 things it can do:
-    1)
-    2)
-    3)
+    1) control amplitude level of a sample over time
+    2) control filter cutoff frequency over time 
+    3) control pitch of a sample over time
  */
 
 /*
-Thing 9)
+Thing 9) LFO
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) Rate in Hz
+    2) Modulation amount as a percentage
+    3) Modulation destination 
+    4) Waveform type
+    5) Attack in ms
 3 things it can do:
-    1)
-    2)
-    3)
+    1) modulate amplitude of sample 
+    2) modulate pitch of sample
+    3) modulate audio output between left and right channel
  */
 
 /*
