@@ -145,15 +145,15 @@ Thing 5) Waveform display
 /*
 Thing 6) Control panel display
 5 properties:
-    1) Height in pixels
-    2) Width in pixels 
-    3) Number of parameters
-    4) Parameter knob size in pixels
-    5) Button size in pixels
+    1) Gain level in dB
+    2) Pan setting (-50 to 50)
+    3) Number of voices
+    4) Sampler playback mode
+    5) Transposition in semitones 
 3 things it can do:
-    1) change amplitude of waveform in the waveform display
-    2) display automation changes of a parameter
-    3) manipulate loop length of sample in the waveform display
+    1) change amplitude of sample
+    2) pan audio in a stereo image
+    3) transpose audio in terms of musical intervals
  */
 
 /*
