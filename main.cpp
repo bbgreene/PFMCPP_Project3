@@ -1,9 +1,9 @@
 /*
-Project 3 - Part 1a / 5
+Project 3 - Part 1d / 5
 Video:  Chapter 2 Part 5
 User-Defined Types
 
-Create a branch named Part1
+Continue your work on branch Part1
 
 Purpose: The entire purpose of this 5-part project is to get you writing C++ code that compiles and to 
 reinforce the syntax habits that C++ requires.  
@@ -20,67 +20,198 @@ You are going to write 10 UDTs in project3.
     Part 1e: you will convert those 10 plain-english UDTs into code that runs.
 ************************
 
-1) Look at the picture of the car interior (Part1a pic.jpg).  
-    Fill in the blanks below which break this car interior down into sub-objects.
+    The goal of this step is to get you to think about breaking down an object into smaller and smaller objects, 
+    until the smallest object is made of up only C++ primitives. 
 
-    Several sub-objects are listed below that make up this car's interior.
-        you're going to name several things that you'll find on each subobject
-        you're going to name several things that each subobject can do.
-        If you've seen "Family Feud", we are going to do what they do in that show
+    Continuing the previous example:  Cell Phone
 
-        A few blanks are filled in for you already.
+    A Cell Phone is made up of the following 5 properties/sub-objects and 3 actions:
+        Display
+        Memory
+        CPU
+        Radio
+        Applications
+    3 actions:
+        make a call
+        send a text
+        run an application.
 
-Main Object: Car Interior
-Sub Object 1: Steering Wheel
-    Name 4 things you'll find on the:    Steering Wheel
-        1) paddle shifters
-        2) 'cruise control' controls
-        3) 
-        4) 
-    Name 2 things you can do with the:   Steering Wheel
-        1) adjust cruise control settings.
-        2)
-        
-Sub Object 2: Instrument Cluster
-    Name 4 things you'll find on the:   Instrument Cluster
-        1)
-        2)
-        3)
-        4)
-    Name 3 things you can do with the:   Instrument Cluster
-        1)
-        2)
-        3)
+    These 5 properties can be broken down into their own sub-objects and properties. 
+
+    If we break down the first property 'Display' into its 5 properties we get:
+        brightness
+        amount of power consumed.
+        pixels
+        width in cm
+        height in cm
+
+    the Display's brightness can be represented with a Primitive, such as a double. 
+
+    The amount of power consumed can also be represented with a Primitive, such as a float or integer (i.e. 250mWa)
     
-Sub Object 3: Environment Controls
-    Name 3 things you'll find on the:    Environment Controls
-        1)
-        2)
-        3)
-    Name 3 things you can do with the:   Environment Controls
-        1)
-        2)
-        3)
+    The 'pixels' property must be represented with an array of Pixel instances, as the screen has more than 1 row of pixels.
+        Arrays have not been discussed and can't be used in this project.
+        Instead, we can use an Integer primitive to store the Number of Pixels:
 
-Sub Object 4: Infotainment System
-    Name 3 things you'll find on the:    Infotainment System
-        1)
-        2)
-        3)
-    Name 3 things you can do with the:   Infotainment System
-        1)
-        2)
-        3)
+    Display:
+        Number of Pixels
+        Amount of Power consumed (milliwatt-hours)
+        Brightness
+        width in cm
+        height in cm
+************************
 
-Sub Object 5: Seat 
-    Name 3 things you'll find on the:    Seat
-        1)
-        2)
-        3)
-    Name 2 things you can do with the:   Seat
-        1)
-        2)
+1) Fill in #5 - #9 with plain-english UDTs for the 5 properties you created for UDT #10
+    example: 
+        If #10's first property was 'Engine', then your `Thing 5)` will be `Engine` and 
+        you will need to provide 5 properties and 3 member functions of that Engine object in plain English
 */
+
+
+
+
+
+
+/*
+Thing 1) Laptop
+5 properties:
+    1) number of letter keys
+    2) number of numeric keys
+    3) amount of binary information in hard disk
+    4) number of usb ports
+    5) amount of electricity needed for portable use
+3 things it can do:
+    1) transfer information from usb device to hard disk
+    2) automatically adjust display brightness
+    3) provide update information to user
+ */
+
+/*
+Thing 2) MIDI Keyboard
+5 properties:
+    1) number of white keys
+    2) number of black keys
+    3) amount of user presets
+    4) number of velocity sensitive pads
+    5) number of encoders
+3 things it can do:
+    1) output MIDI information
+    2) display MIDI note value
+    3) consume electricity via USB port
+ */
+
+/*
+Thing 3) Hardware Synthesiser
+5 properties:
+    1) number of filters
+    2) number of audio outputs
+    3) amount of waveform types 
+    4) number of LFOs
+    5) number of envelopes
+3 things it can do:
+    1) generate audio signals
+    2) automatically adjust filter frequency
+    3) output audio signals
+ */
+
+/*
+Thing 4) House Plant
+5 properties:
+    1) number of roots
+    2) number of leaves
+    3) amount of water in roots
+    4) number of flowers
+    5) number of ladybirds living on it per day
+3 things it can do:
+    1) uses carbon dioxide
+    2) absorbs water from the air
+    3) extends it’s overall height per day
+ */
+
+/*
+Thing 5) Waveform display
+5 properties:
+    1) Length of sample in ms 
+    2) Height in pixels 
+    3) Width in pixels
+    4) Zoom function as a percentage
+    5) Loop hightlight colour
+3 things it can do:
+    1) display transient positions of digital audio signal 
+    2) display playback head position
+    3) display user defined loops points of sample
+ */
+
+/*
+Thing 6) Global settings
+5 properties:
+    1) Gain level in dB
+    2) Pan setting (-50 to 50)
+    3) Number of voices
+    4) Sampler playback mode
+    5) Transposition in semitones 
+3 things it can do:
+    1) change amplitude of sample
+    2) pan audio in a stereo image
+    3) transpose audio in terms of musical intervals
+ */
+
+/*
+Thing 7) Filter
+5 properties:
+    1) Frequency cutoff in Hz
+    2) Resonance as a percentage
+    3) Filter type selection
+    4) Distortion amount in dB
+    5) Key tracker
+3 things it can do:
+    1) affect frequency content of audio
+    2) distort frequency content of audio
+    3) adjust frequency cutoff of filter based on user MIDI note value input
+ */
+
+/*
+Thing 8) Envelope
+5 properties:
+    1) Attack time in ms
+    2) Decay time in ms
+    3) Sustain level in dB
+    4) Release time in ms
+    5) Amount of MIDI velocity level as a percentage
+3 things it can do:
+    1) control amplitude level of a sample over time
+    2) control filter cutoff frequency over time 
+    3) control pitch of a sample over time
+ */
+
+/*
+Thing 9) LFO
+5 properties:
+    1) Rate in Hz
+    2) Modulation amount as a percentage
+    3) Modulation destination 
+    4) Waveform type
+    5) Attack in ms
+3 things it can do:
+    1) modulate amplitude of sample 
+    2) modulate pitch of sample
+    3) modulate audio output between left and right channel
+ */
+
+/*
+Thing 10) VST Sampler 
+5 properties:
+    1) Waveform display
+    2) Global settings
+    3) Filter
+    4) Envelope
+    5) LFO
+3 things it can do:
+    1) display waveform of an audio sample 
+    2) playback audio at various speeds
+    3) effect frequency content of audio
+ */
+
 /*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
 
