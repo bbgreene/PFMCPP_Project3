@@ -143,7 +143,7 @@ Thing 5) Waveform display
  */
 
 /*
-Thing 6) Control panel display
+Thing 6) Global settings
 5 properties:
     1) Gain level in dB
     2) Pan setting (-50 to 50)
@@ -202,7 +202,7 @@ Thing 9) LFO
 Thing 10) VST Sampler 
 5 properties:
     1) Waveform display
-    2) Control panel display
+    2) Global settings
     3) Filter
     4) Envelope
     5) LFO
