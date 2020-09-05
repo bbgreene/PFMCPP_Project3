@@ -182,7 +182,7 @@ struct Laptop
 		int numPowerOnPerday;
 		int personalEmailTot;
         int programmesOpen;
-		
+        
 		void turnOnLaptop(bool laptopOff, bool userPressedPowerButton);
 		auto sendEmails(bool personalEmails = true, int emailsPerDay = 10);
 		auto openAProgram(int currentProgramAmount, bool newProgrammeOpen);
