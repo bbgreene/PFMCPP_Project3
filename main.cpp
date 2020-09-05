@@ -180,7 +180,7 @@ struct Laptop
 		bool isUserAdmin;
 		std::string userName = "Billy Crystal";
 		int numPowerOnPerday;
-        int personalEmailTot;
+		int personalEmailTot;
         int programmesOpen;
 		
 		void turnOnLaptop(bool laptopOff, bool userPressedPowerButton);
