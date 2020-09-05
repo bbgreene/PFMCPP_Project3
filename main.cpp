@@ -168,31 +168,31 @@ void Person::run(int howFast, bool startWithLeftFoot)
 struct Laptop
 {
     int numLetterKeys = 26;
-	int numNumericKeys = 10;
-	float binaryInfoInHardDisk = 499.96f;
-	int numUSBPorts = 2;
-	float electricityForPortableUse = 58.2f;
+    int numNumericKeys = 10;
+    float binaryInfoInHardDisk = 499.96f;
+    int numUSBPorts = 2;
+    float electricityForPortableUse = 58.2f;
 
-	struct User
-	{
-		bool isUserMale = true;
-		int userAge = 37;
-		bool isUserAdmin;
-		std::string userName = "Billy Crystal";
-		int numPowerOnPerday;
-		int personalEmailTot;
+    struct User
+    {
+        bool isUserMale = true;
+        int userAge = 37;
+        bool isUserAdmin;
+        std::string userName = "Billy Crystal";
+        int numPowerOnPerday;
+        int personalEmailTot;
         int programmesOpen;
         
-		void turnOnLaptop(bool laptopOff, bool userPressedPowerButton);
-		auto sendEmails(bool personalEmails = true, int emailsPerDay = 10);
-		auto openAProgram(int currentProgramAmount, bool newProgrammeOpen);
-	};
+        void turnOnLaptop(bool laptopOff, bool userPressedPowerButton);
+        auto sendEmails(bool personalEmails = true, int emailsPerDay = 10);
+        auto openAProgram(int currentProgramAmount, bool newProgrammeOpen);
+    };
 
-	void transInfoFromUSBToHardDisk(float transferTime, float dataSize);
-	void automaticallyAdjustBrightness(float timeOfDay, int displayBrightnessLevel);
-	auto displayUpdateInfo(bool isUpdateAvailable, User user);
+    void transInfoFromUSBToHardDisk(float transferTime, float dataSize);
+    void automaticallyAdjustBrightness(float timeOfDay, int displayBrightnessLevel);
+    auto displayUpdateInfo(bool isUpdateAvailable, User user);
 
-	User userAdmin;
+    User userAdmin;
 };
 
 void Laptop::User::turnOnLaptop(bool laptopOff, bool userPressedPowerButton)
@@ -251,16 +251,16 @@ auto Laptop::displayUpdateInfo(bool isUpdateAvailable, Laptop::User user)
 
 struct MIDIKeyboard
 {
-	int numWhiteKeys = 52;
-	int numBlackKeys = 36;
-	float electricityPerDay;
-	int midiVeloctiyRange;
-	int midiNoteRange;
+    int numWhiteKeys = 52;
+    int numBlackKeys = 36;
+    float electricityPerDay;
+    int midiVeloctiyRange;
+    int midiNoteRange;
     int ledDisplay;
 
-	void outputMIDIInfo(int midiNoteValue, int velocityValue);
-	void diplayMIDINoteValue(bool isKeyPressed, int midiNoteValue);
-	void consumeElectricity(bool pluggedInToHost, float wattage);
+    void outputMIDIInfo(int midiNoteValue, int velocityValue);
+    void diplayMIDINoteValue(bool isKeyPressed, int midiNoteValue);
+    void consumeElectricity(bool pluggedInToHost, float wattage);
 };
 
 void MIDIKeyboard::outputMIDIInfo(int midiNoteValue, int velocityValue)
