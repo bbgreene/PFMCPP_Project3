@@ -198,9 +198,9 @@ struct Laptop
 void Laptop::User::turnOnLaptop(bool laptopOff, bool userPressedPowerButton)
 {
    if(laptopOff && userPressedPowerButton)
-    {
+   {
        numPowerOnPerday += 1;
-    }
+   }
 }
 
 auto Laptop::User::sendEmails(bool personalEmails, int emailsPerDay)
