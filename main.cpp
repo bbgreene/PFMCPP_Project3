@@ -1,4 +1,4 @@
- /*
+/*
  Project 3 - Part 2 / 5
  Video: Chapter 2 Part 6
  Implementations tasks
@@ -108,9 +108,51 @@ struct CarWash
     You'll need to insert the Person struct from the video in the space below.
  */
 
+struct Foot
+{
+    int stepSize();
+    void stepForward();
+};
 
+int Foot::stepSize()
+{
+    return 5;
+}
 
+void Foot::stepForward()
+{
 
+}
+
+struct Person
+{
+    int age;
+    int height;
+    float hairLength;
+    float GPA;
+    unsigned int SATScore;
+    int distanceTraveled;
+    Foot leftFoot;
+    Foot rightFoot;
+
+    void run(int, bool);
+};
+
+void Person::run(int howFast, bool startWithLeftFoot)
+{
+    if(startWithLeftFoot == true)
+    {
+        leftFoot.stepForward();
+        rightFoot.stepForward();
+    }
+    else
+    {
+        rightFoot.stepForward();
+        leftFoot.stepForward();
+    }
+    distanceTraveled += leftFoot.stepSize() + rightFoot.stepSize();
+    howFast = 2;
+}
 
  /*
  2) provide implementations for the member functions you declared in your 10 user-defined types from the previous video outside of your UDT definitions.
@@ -121,385 +163,568 @@ struct CarWash
  4) After you finish defining each type/function, click the [run] button.  Clear up any errors or warnings as best you can.
  */
 
+//UDT 1 // complete
 
-/*
-Thing 1) Laptop
-5 properties:
-    1) number of letter keys
-    2) number of numeric keys
-    3) amount of binary information in hard disk
-    4) number of usb ports
-    5) amount of electricity needed for portable use
-3 things it can do:
-    1) transfer information from usb device to hard disk
-    2) automatically adjust display brightness
-    3) provide update information to user
- */
 struct Laptop
 {
-	//number of letter keys
-	int numLetterKeys = 26;
-	//number of numeric keys
-	int numNumericKeys = 10;
-	//amount of binary information in hard disk
-	float binaryInfoInHardDisk = 499.96f;
-	//number of usb ports
-	int numUSBPorts = 2;
-	//amount of electricity needed for portable use
-	float electricityForPortableUse = 58.2f;
-	
-	struct User //first nested UDT
-	{
-		bool isUserMale = true;
-		int userAge = 37;
-		bool isUserAdmin = true;
-		std::string userName = "Billy Crystal";
-		std::string password = "123456789";
-		
-		bool turnOnLaptop(bool laptopOff = true, bool userPressedPowerButton = true);
-		int sendEmails(int emailsPerDay = 10, bool personalEmails = true);
-		void openAProgram(int currentProgramAmount, bool isUserAdmin);
-	};
+    int numLetterKeys = 26;
+    int numNumericKeys = 10;
+    float binaryInfoInHardDisk = 499.96f;
+    int numUSBPorts = 2;
+    float electricityForPortableUse = 58.2f;
 
-	//transfer information from usb device to hard disk
-	void transInfoFromUSBToHardDisk(float transferTime, float dataSize);
-    	//automatically adjust display brightness
-	void automaticallyAdjustBrightness(float timeOfDay, int displayBrightnessLevel);
-    	//provide update information to user
-	bool displayUpdateInfo(bool isUpdateAvailable, User user);
+    struct User
+    {
+        bool isUserMale = true;
+        int userAge = 37;
+        bool isUserAdmin;
+        std::string userName = "Billy Crystal";
+        int numPowerOnPerday;
+        int personalEmailTot;
+        int programmesOpen;
+        
+        void turnOnLaptop(bool laptopOff, bool userPressedPowerButton);
+        auto sendEmails(bool personalEmails = true, int emailsPerDay = 10);
+        auto openAProgram(int currentProgramAmount, bool newProgrammeOpen);
+    };
 
-	User whoUsingLaptop; //example of member variable whose type is a UDT (User)
+    void transInfoFromUSBToHardDisk(float transferTime, float dataSize);
+    void automaticallyAdjustBrightness(float timeOfDay, int displayBrightnessLevel);
+    auto displayUpdateInfo(bool isUpdateAvailable, User user);
+
+    User userAdmin;
 };
 
-/*
-Thing 2) MIDI Keyboard
-5 properties:
-    1) number of white keys
-    2) number of black keys
-    3) amount of user presets
-    4) number of velocity sensitive pads
-    5) number of encoders
-3 things it can do:
-    1) output MIDI information
-    2) display MIDI note value
-    3) consume electricity via USB port
- */
+void Laptop::User::turnOnLaptop(bool laptopOff, bool userPressedPowerButton)
+{
+   if(laptopOff && userPressedPowerButton)
+   {
+       numPowerOnPerday += 1;
+   }
+}
+
+auto Laptop::User::sendEmails(bool personalEmails, int emailsPerDay)
+{
+    if(personalEmails)
+    {
+        emailsPerDay = 10;
+    }
+    else
+    {
+        emailsPerDay = 0;
+    }
+    personalEmailTot += emailsPerDay;
+}
+
+auto Laptop::User::openAProgram(int currentProgramAmount, bool newProgrammeOpen)
+{
+    currentProgramAmount = 3;
+    newProgrammeOpen = true;
+    programmesOpen += 1;
+}
+
+void Laptop::transInfoFromUSBToHardDisk(float transferTime, float dataSize = 200)
+{
+    transferTime = dataSize / 50;
+    binaryInfoInHardDisk += dataSize;
+}
+
+void Laptop::automaticallyAdjustBrightness(float timeOfDay, int displayBrightnessLevel)
+{
+    if(timeOfDay > 6.0f && timeOfDay < 18.0f)
+    {
+        displayBrightnessLevel = 80;
+    }
+    else
+    {
+        displayBrightnessLevel = 35;
+    }  
+}
+
+auto Laptop::displayUpdateInfo(bool isUpdateAvailable, Laptop::User user)
+{
+    isUpdateAvailable = true;
+    user = userAdmin;
+}
+
+// UDT 2 // complete
+
 struct MIDIKeyboard
 {
-	//number of white keys
-	int numWhiteKeys = 52;
-	//number of black keys
-	int numBlackKeys = 36;
-	//amount of user presets
-	int userPresetsAvailable = 64;
-	//number of velocity sensitive pads
-	int numVelocityPads = 16;
-	//number of encoders
-	int numEncoders = 8;
+    int numWhiteKeys = 52;
+    int numBlackKeys = 36;
+    float electricityPerDay;
+    int midiVeloctiyRange;
+    int midiNoteRange;
+    int ledDisplay;
 
-	//output MIDI information
-	int outputMIDIInfo(int midiNoteValue = 62, int velocityValue = 71);
-	//display MIDI note value
-	void diplayMIDINoteValue(bool isKeyPressed);
-	//consume electricity via USB port
-	float consumeElectricity(bool pluggedInToHost = true, float wattage = 10.4f);
+    void outputMIDIInfo(int midiNoteValue, int velocityValue);
+    void diplayMIDINoteValue(bool isKeyPressed, int midiNoteValue);
+    void consumeElectricity(bool pluggedInToHost, float wattage);
 };
 
-/*
-Thing 3) Hardware Synthesiser
-5 properties:
-    1) number of filters
-    2) number of audio outputs
-    3) amount of waveform types 
-    4) number of LFOs
-    5) number of envelopes
-3 things it can do:
-    1) generate audio signals
-    2) automatically adjust filter frequency
-    3) output audio signals
- */
+void MIDIKeyboard::outputMIDIInfo(int midiNoteValue, int velocityValue)
+{
+    midiNoteValue = 19;
+    velocityValue = 93;
+    midiNoteRange += midiNoteValue;
+    midiVeloctiyRange += velocityValue;   
+}
+
+void MIDIKeyboard::diplayMIDINoteValue(bool isKeyPressed, int midiNoteValue)
+{
+    if(isKeyPressed)
+    {
+        ledDisplay += midiNoteValue;
+    }
+}
+
+void MIDIKeyboard::consumeElectricity(bool pluggedInToHost, float wattage)
+{
+    if(pluggedInToHost)
+    {
+        wattage = 10.4f;
+    }
+    else
+    {
+        wattage = 0.0f;
+    }
+    electricityPerDay += wattage;
+}
+
+// UDT 3 // complete
+
 struct HardwareSynthesiser
 {
-	//number of filters
-	int numFilters = 3;
-	//number of audio outputs
+	float audioRange;
 	int numAudioOutputs = 2;
-	//amount of waveform types 
-	int amountWaveforms = 4;
-	//number of LFOs
-	int numLFOs = 1;
-	//number of envelopes
+	int amountWaveforms;
+	int numLFOs;
 	int numEnvelopes = 2;
+    float outputLevel;
 
-	//generate audio signals
-	void generateAudioSignals(float oscFreq, int waveType);
-	//automatically adjust filter frequency
+	auto generateAudioSignals(float maxOscFreq, int waveType);
 	void autoFilterAdjust(int freqRange, bool useLFO, bool useEnv1); 
-	//output audio signals
-	float outputAudioSignals(bool stereo = true, float maxOutput = 24.0f);
+	void outputAudioSignals(bool keyHasBeenPressed, float maxOutput);
 };
 
-/*
-Thing 4) House Plant
-5 properties:
-    1) number of roots
-    2) number of leaves
-    3) amount of water in roots
-    4) number of flowers
-    5) number of ladybirds living on it per day
-3 things it can do:
-    1) uses carbon dioxide
-    2) absorbs water from the air
-    3) extends it’s overall height per day
- */
+auto HardwareSynthesiser::generateAudioSignals(float maxOscFreq = 5000.0f, int waveType = 1)
+{
+    audioRange += maxOscFreq;
+    amountWaveforms += waveType;
+}
+
+void HardwareSynthesiser::autoFilterAdjust(int freqRange, bool useLFO, bool useEnv1)
+{
+    if(useLFO)
+    {
+        freqRange = 200;
+        numLFOs = 1;
+    }
+    else
+    {
+        useEnv1 = true;
+        numEnvelopes = 1;
+        freqRange = 300;
+    }
+}
+
+void HardwareSynthesiser::outputAudioSignals(bool keyHasBeenPressed, float output)
+{
+    if(keyHasBeenPressed)
+    {
+        output = 24.0f;
+    }
+    else 
+    {
+        output = 0.0f;
+    }
+    outputLevel += output;
+}
+
+//UDT 4. // complete
+
 struct HousePlant
 {
-    //number of roots
-    int numRoots = 25;
-    //number of leaves
+    int currentNumRoots = 25;
     int numLeaves = 73;
-    //amount of water in roots
     float waterInRoots = 1.2f;
-    //number of flowers
     int numFlowers = 22;
-    //number of ladybirds living on it per day
     int numLadybirdsPerDay = 3;
+    float COperday; // new member variable for implementation 1 below
 
-    //uses carbon dioxide
     void useCarbonDioxide(float amountOfCarbonPerDay, bool isItDayTime);
-    //absorbs water from the air
     void absorbWater(float amountOfWaterPerDay, bool didItRain);
-    //extends it’s overall height per day
-    void extendHeightPerDay(float growthPerDay, bool sunnyDay, int numRoots);//example of using UDT in a member function
+    void extendHeightPerDay(float growthPerDay, bool sunnyDay);
 };
 
-/*
-Thing 5) Waveform display
-5 properties:
-    1) Length of sample in ms 
-    2) Height in pixels 
-    3) Width in pixels
-    4) Zoom function as a percentage
-    5) Loop hightlight colour
-3 things it can do:
-    1) display transient positions of digital audio signal 
-    2) display playback head position
-    3) display user defined loops points of sample
- */
+void HousePlant::useCarbonDioxide(float amountOfCarbonPerDay, bool isItDayTime)
+{
+    if(!isItDayTime)
+    {
+        amountOfCarbonPerDay = 0.0f;
+    }
+    else
+    {
+        amountOfCarbonPerDay = 300.0f;
+    }
+    COperday += amountOfCarbonPerDay;
+}
+
+void HousePlant::absorbWater(float amountOfWaterPerDay, bool didItRain)
+{
+    if(didItRain)
+    {
+        amountOfWaterPerDay = 1.2f;
+    }
+    else 
+    {
+        amountOfWaterPerDay = 0.1f;
+    }
+    waterInRoots += amountOfWaterPerDay;
+}
+
+void HousePlant::extendHeightPerDay(float growthPerDay, bool sunnyDay)
+{
+    if(sunnyDay)
+    {
+       growthPerDay = 2.3f;
+    } 
+    else 
+    {
+       growthPerDay = 1.1f;  
+    }
+    currentNumRoots += 1;
+}
+
+// UDT 5 // complete
+
 struct WaveformDisplay
 {
-    //Length of sample in ms
     float lengthOfSample = 3.2f;
-    //Height in pixels
     double height = 233; 
-    //Width in pixels
     double width = 643;
-    //Zoom function as a percentage
     float zoomFunctionLevel = 0.0f;
-    //Loop hightlight colour
     std::string loopHighlightColour = "Orange";
+    int bpm;
 
-    //display transient positions of digital audio signal
-    void transientPositions(int transientAmount, float subdivision);
-    //display playback head position
-    float playbackHeadPos(float samplePos, float lengthOfSample);
-    //display user defined loops points of sample
+    void transientPositions(bool bpmOn, float quarterSubdivision,int bpmValue);
+    void playbackHeadPos(float samplePos);
     void loopPoints(float startPos, float endPos, bool isLoopFunctionOn);
+    int sampSize(); // used in UDT 10
+    void playForward(); // used in UDT 10
 };
 
-/*
-Thing 6) Global settings
-5 properties:
-    1) Gain level in dB
-    2) Pan setting (-50 to 50)
-    3) Number of voices
-    4) Sampler playback mode
-    5) Transposition in semitones 
-3 things it can do:
-    1) change amplitude of sample
-    2) pan audio in a stereo image
-    3) transpose audio in terms of musical intervals
- */
+void WaveformDisplay::transientPositions(bool bpmOn, float quarterSubdivision, int bpmValue = 120)
+{
+    if(bpmOn)
+    {
+        quarterSubdivision = 60 / bpmValue;
+    }
+    bpm += bpmValue;
+}
+
+void WaveformDisplay::playbackHeadPos(float samplePos)
+{
+    samplePos = 0.0f;
+}
+
+void WaveformDisplay::loopPoints(float startPos, float endPos, bool isLoopFunctionOn)
+{
+    if(isLoopFunctionOn)
+    {
+        loopHighlightColour = "Orange";
+    }
+    else
+    {
+        loopHighlightColour = "black";
+    }
+    startPos = 1.1f;
+    endPos = 2.3f;
+}
+
+int WaveformDisplay::sampSize()
+{
+    return 1;
+}
+
+void WaveformDisplay::playForward()
+{
+
+}
+// UDT 6 // complete
+
 struct GlobalSettings
 {
-    //Gain level in dB
     double gainLevel = 0.0;
-    //Pan setting (-50 to 50)
     int panPosition = -23;
-    //Number of voices
     int numVoices = 3;
-    //Sampler playback mode
     std::string playbackMode = "Classic";
-    //Transposition in semitones 
-    int transpose = -4;
+    int transpose = 0;
 
-    //change amplitude of sample
-    double changeAmp(double gainLevel, double maxGain = 6); 
-    //pan audio in a stereo image
-    int panAudio(int panPosition, bool sampleIsStereo = false);
-    //transpose audio in terms of musical intervals
-    int transposeAudio(int transpose, int highestValue = 24, int lowestValue = -24);
+    void changeAmp(double gainLevelChange); 
+    void panAudio(bool sampleIsStereo, bool outputStereo, int changePanPosition);
+    void transposeAudio(int changePitch);
 };
 
-/*
-Thing 7) Filter
-5 properties:
-    1) Frequency cutoff in Hz
-    2) Resonance as a percentage
-    3) Filter type selection
-    4) Distortion amount in dB
-    5) Key tracker
-3 things it can do:
-    1) affect frequency content of audio
-    2) distort frequency content of audio
-    3) adjust frequency cutoff of filter based on user MIDI note value input
- */
-struct Filter
+void GlobalSettings::changeAmp(double gainLevelChange = 2)
 {
-    //Frequency cutoff in Hz
-    double freqCutoff = 2000.0;
-    //Resonance as a percentage
-    float resonance = 80.0f;
-    //Filter type selection
-    std::string filterType = "Lowpass";
-    //Distortion amount in dB
-    float distortionAmount = 0.0f;
-    //Key tracker
-    int keyTrackerAmount = 0;
+    gainLevel += gainLevelChange;
+}
 
-    struct CircuitTypeEmulator //second nested UDT
+void GlobalSettings::panAudio(bool sampleIsStereo, bool outputStereo, int changePanPosition = 0)
+{
+    if(sampleIsStereo)
     {
-        //type selector
+        outputStereo = true;
+    }
+    else
+    {
+        outputStereo = false;
+    }
+    changePanPosition = 0;
+    panPosition += changePanPosition;
+}
+
+void GlobalSettings::transposeAudio(int changePitch = 2)
+{
+    transpose += changePitch;
+}
+
+// UDT 7 // complete
+
+struct Filter 
+{
+    double freqCutoff = 2000.0;
+    float resonance = 80.0f;
+    std::string filterType = "Lowpass";
+    float m_distortionAmount = 0.0f;
+    int m_keyTrackerAmount = 0;
+
+    struct CircuitTypeEmulator
+    {
         std::string type = "MS20";
-        //drive parameter
         int driveAmount = 0; 
-        //slope of attenuation parameter
         int slope = 24;
-        //self oscillation amount
-        float selfOsc = 20.1f;
-        //toogle switch to clean
+        float selfOscAmount;
         bool isEmulationOn = true;
+        std::string m_ClipType;
 
-
-        //create an internal feedback loop
-        void internallyFeedback(float maxFeedbackValue, float selfOsc);
-        //clip audio
-        std::string clipAudio(std::string clipType = "Soft");
-        //manipulate phase
+        void internallyFeedback(float feedbackValue);
+        void clipAudio(std::string clipType);
         void manipulatePhase(bool isLinearPhase);
     };
 
-    //affect frequency content of audio
-    void freqContentAffected(double lowFreq, double highFreq, double freqCutoff);
-    //distort frequency content of audio
-    void distFreqContent(bool distTurnedUp, float distortionAmount, int driveAmount);
-    //adjust frequency cutoff of filter based on user MIDI note value input
+    void freqContentAffected(double lowFreq, double highFreq, double freqCutoffChange);
+    auto distFreqContent(bool distTurnedUp, float distortionAmount, int driveAmount);
     void midiNoteToCutoff(int midiNoteValue, int keyTrackerAmount);
 
-    CircuitTypeEmulator circuitTypeSelected; //example of member variable whose type is a UDT (CircuitTypeEmulator)
+    CircuitTypeEmulator circuitTypeSelected;
 };
 
-/*
-Thing 8) Envelope
-5 properties:
-    1) Attack time in ms
-    2) Decay time in ms
-    3) Sustain level in dB
-    4) Release time in ms
-    5) Amount of MIDI velocity level as a percentage
-3 things it can do:
-    1) control amplitude level of a sample over time
-    2) control filter cutoff frequency over time 
-    3) control pitch of a sample over time
- */
+void Filter::CircuitTypeEmulator::internallyFeedback(float feedbackValue)
+{
+    if(feedbackValue > 0.7f)
+    {
+        selfOscAmount += feedbackValue;
+    }
+}
+
+void Filter::CircuitTypeEmulator::clipAudio(std::string clipType = "Soft")
+{
+    m_ClipType += clipType;
+}
+
+void Filter::CircuitTypeEmulator::manipulatePhase(bool isLinearPhase)
+{
+    if(!isLinearPhase)
+    {
+        slope = 24;
+    }
+    else 
+    {
+        slope = 12;
+    }
+}
+
+void Filter::freqContentAffected(double lowFreq, double highFreq, double freqCutoffChange)
+{
+    lowFreq = 500;
+    highFreq = 4000;
+    freqCutoffChange = 2000;
+    freqCutoff += freqCutoffChange;
+}
+
+auto Filter::distFreqContent(bool distTurnedUp, float distortionAmount, int driveAmount)
+{
+    distTurnedUp = true;
+    distortionAmount = 1.1f;
+    driveAmount = 3;
+}
+
+void Filter::midiNoteToCutoff(int midiNoteValue, int keyTrackerAmount = 3)
+{
+    midiNoteValue = 45;
+    m_keyTrackerAmount += keyTrackerAmount;
+}
+    
+// UDT 8 // complete
+
 struct Envelope
 {
-    //Attack time in ms
     float attTime = 0.1f;
-    //Decay time in ms
     float decTime = 0.5f;
-    //Sustain level in dB
     float susLevel = 0.0f;
-    //Release time in ms
     float relTime = 1.5f; 
-    //Amount of MIDI velocity level as a percentage
     int midiVelLevel = 75;
 
-    //control amplitude level of a sample over time
-    void controlAmpOverTime(double maxValueAmp, float sampleLength, bool iskeyPressed, bool iskeyReleased);
-    //control filter cutoff frequency over time 
-    void controlCutoffOverTime(double maxValueCutoff, double freqCutoff, bool iskeyPressed, bool iskeyReleased);
-    //control pitch of a sample over time
-    void controlPitchOverTime(double maxValuePitch, double minValue, bool iskeyPressed, bool iskeyReleased);
+    void controlAmpOverTime(bool ampEnvSelected, bool isKeyPressed, float maxValueAmp);
+    void controlCutoffOverTime(bool filterEnvSelected, bool isKeyPressed, double maxValueFilter);
+    void controlPitchOverTime(bool pitchEnvSelected, bool isKeyPressed, double maxValuePitch);
 };
 
-/*
-Thing 9) LFO
-5 properties:
-    1) Rate in Hz
-    2) Modulation amount as a percentage
-    3) Modulation destination 
-    4) Waveform type
-    5) Attack in ms
-3 things it can do:
-    1) modulate amplitude of sample 
-    2) modulate pitch of sample
-    3) modulate audio output between left and right channel
- */
+void Envelope::controlAmpOverTime(bool ampEnvSelected, bool isKeyPressed, float maxValueAmp)
+{
+    if(isKeyPressed && ampEnvSelected)
+    {
+        maxValueAmp = midiVelLevel / 100;
+    }
+    else 
+    {
+        maxValueAmp = 0.0f;
+    }
+}
+
+void Envelope::controlCutoffOverTime(bool filterEnvSelected, bool isKeyPressed, double maxValueFilter)
+{
+    if(isKeyPressed && filterEnvSelected)
+    {
+        maxValueFilter = midiVelLevel * 10;
+    }
+    else 
+    {
+        maxValueFilter = 1000;
+    }
+}
+
+void Envelope::controlPitchOverTime(bool pitchEnvSelected, bool isKeyPressed, double maxValuePitch)
+{
+    if(isKeyPressed && pitchEnvSelected)
+    {
+        maxValuePitch = 24 / 100 * midiVelLevel;
+    }
+    else 
+    {
+        maxValuePitch = 0;
+    }
+}
+// UDT 9 // complete
+
 struct LFO
 {
-    //Rate in Hz
     float lfoRate = 0.0f;
-    //Modulation amount as a percentage
     int modAmount = 0;
-    //Modulation destination 
     int modDest = 0;
-    //Waveform type
     std::string waveform = "Saw";
-    //Attack in ms
     float attack = 2.3f;
 
-    //modulate amplitude of sample
-    void modAmpOfSample(bool lfoON, int modAmount = 50, int modDest = 0);
-    //modulate pitch of sample
-    void modPitchOfSample(bool lfoON, int modAmount = 18, int modDest = 1);
-    //modulate audio output between left and right channel
-    void modPanhOfSample(bool lfoON, int modAmount = 25, int modDest = 2);
+    void modAmpOfSample(bool lfoON, int ampRange, bool ampToggle);
+    void modPitchOfSample(bool lfoON, int pitchRange, bool pitchToggle);
+    void modPanOfSample(bool lfoON, int panRange, bool panToggle);
 };
 
-/*
-Thing 10) VST Sampler 
-5 properties:
-    1) Waveform display
-    2) Global settings
-    3) Filter
-    4) Envelope
-    5) LFO
-3 things it can do:
-    1) display waveform of an audio sample 
-    2) playback audio at various speeds
-    3) effect frequency content of audio
- */
+void LFO::modAmpOfSample(bool lfoON, int ampRange, bool ampToggle = true)
+{
+    if(lfoON && ampToggle)
+    {
+        ampRange = 1;
+    }
+    else
+    {
+        ampRange = 0;
+    }
+    modDest += 0;
+}
+
+void LFO::modPitchOfSample(bool lfoON, int pitchRange, bool pitchToggle = true)
+{
+    if(lfoON && pitchToggle)
+    {
+        pitchRange = 24;
+    }
+    else
+    {
+        pitchRange = 0;
+    }
+    modDest += 1;
+}
+
+void LFO::modPanOfSample(bool lfoON, int panRange, bool panToggle = true)
+{
+    if(lfoON && panToggle)
+    {
+        panRange = 100;
+    }
+    else
+    {
+        panRange = 0;
+    }
+    modDest += 2;
+}
+
+// UDT 10 // complete
+
 struct VSTSampler
 {
-    //Waveform display
     WaveformDisplay waveformVisual;
-    //Global settings
     GlobalSettings globalControlSettings;
-    //Filter
     Filter filter;
-    //Envelope
     Envelope envelope;
-    //LFO
     LFO lfo;
+    WaveformDisplay leftChannel;   
+    WaveformDisplay rightChannel;
+    bool displayAWaveform; 
+    int numberOfIndividualSamples;
+    bool normalSpeed; 
 
-    //display waveform of an audio sample
-    void displayVisualWaveform();
-    //playback audio at various speeds
-    void playbackSpeed(bool warpOff, int midiNoteValueIn, int highestSpeedPercentage);
-    //affect frequency content of audio
-    void freqContentOverall();
+    void displayVisualWaveform(bool isSampleLoaded);
+    void playbackSpeed(bool warpOff);
+    void playbackSamples(bool stereoSampleLoaded);
 };
+
+void VSTSampler::displayVisualWaveform(bool isSampleLoaded)
+{
+    if(isSampleLoaded)
+    {
+        displayAWaveform = true;
+    }
+}
+
+void VSTSampler::playbackSpeed(bool warpOff)
+{
+    if(warpOff)
+    {
+        normalSpeed = true;
+    }
+    else
+    {
+        normalSpeed = false;
+    }
+}
+
+void VSTSampler::playbackSamples(bool stereoSampleLoaded) // uses member functions from WaveformDisplay struct. This implementation adds sample snapshots together depending on stereo/mono
+{
+    if(stereoSampleLoaded)
+    {
+        leftChannel.playForward();
+        rightChannel.playForward();
+    }
+    else
+    {
+        leftChannel.sampSize();
+    }
+    numberOfIndividualSamples += leftChannel.sampSize() + rightChannel.sampSize();
+}
 /*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
 
