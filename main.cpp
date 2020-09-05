@@ -180,7 +180,7 @@ struct Laptop
 		bool isUserAdmin;
 		std::string userName = "Billy Crystal";
 		int numPowerOnPerday;
-        int personalEmailTotal;
+        int personalEmailTot;
         int programmesOpen;
 		
 		void turnOnLaptop(bool laptopOff, bool userPressedPowerButton);
@@ -213,7 +213,7 @@ auto Laptop::User::sendEmails(bool personalEmails, int emailsPerDay)
     {
         emailsPerDay = 0;
     }
-    personalEmailTotal += emailsPerDay;
+    personalEmailTot += emailsPerDay;
 }
 
 auto Laptop::User::openAProgram(int currentProgramAmount, bool newProgrammeOpen)
