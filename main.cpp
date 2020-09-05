@@ -167,7 +167,7 @@ void Person::run(int howFast, bool startWithLeftFoot)
 
 struct Laptop
 {
-	int numLetterKeys = 26;
+    int numLetterKeys = 26;
 	int numNumericKeys = 10;
 	float binaryInfoInHardDisk = 499.96f;
 	int numUSBPorts = 2;
