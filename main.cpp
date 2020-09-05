@@ -1,4 +1,4 @@
- /*
+/*
  Project 3 - Part 2 / 5
  Video: Chapter 2 Part 6
  Implementations tasks
@@ -179,9 +179,9 @@ struct Laptop
 		int userAge = 37;
 		bool isUserAdmin;
 		std::string userName = "Billy Crystal";
-		std::string password = "123456789";
-        int personalEmailTotal; // added member variable for nested 2nd implementation
-        int programmesOpen; // added member variable for nested 3rd implementation
+		int numPowerOnPerday;
+        int personalEmailTotal;
+        int programmesOpen;
 		
 		void turnOnLaptop(bool laptopOff, bool userPressedPowerButton);
 		auto sendEmails(bool personalEmails = true, int emailsPerDay = 10);
@@ -197,21 +197,23 @@ struct Laptop
 
 void Laptop::User::turnOnLaptop(bool laptopOff, bool userPressedPowerButton)
 {
-   laptopOff = true;
-   userPressedPowerButton = true;
+   if(laptopOff && userPressedPowerButton)
+    {
+       numPowerOnPerday += 1;
+    }
 }
 
 auto Laptop::User::sendEmails(bool personalEmails, int emailsPerDay)
 {
- if(personalEmails == true)
- {
-    emailsPerDay = 10;
- }
- else
- {
-    emailsPerDay = 0;
- }
-personalEmailTotal += emailsPerDay;
+    if(personalEmails)
+    {
+        emailsPerDay = 10;
+    }
+    else
+    {
+        emailsPerDay = 0;
+    }
+    personalEmailTotal += emailsPerDay;
 }
 
 auto Laptop::User::openAProgram(int currentProgramAmount, bool newProgrammeOpen)
@@ -234,7 +236,9 @@ void Laptop::automaticallyAdjustBrightness(float timeOfDay, int displayBrightnes
         displayBrightnessLevel = 80;
     }
     else
+    {
         displayBrightnessLevel = 35;
+    }  
 }
 
 auto Laptop::displayUpdateInfo(bool isUpdateAvailable, Laptop::User user)
@@ -249,10 +253,10 @@ struct MIDIKeyboard
 {
 	int numWhiteKeys = 52;
 	int numBlackKeys = 36;
-	int userPresetsAvailable = 64;
-	int numVelocityPads = 16;
-	int numEncoders = 8;
-    int ledDisplay; // new member variable for implementation 2 below
+	float electricityPerDay;
+	int midiVeloctiyRange;
+	int midiNoteRange;
+    int ledDisplay;
 
 	void outputMIDIInfo(int midiNoteValue, int velocityValue);
 	void diplayMIDINoteValue(bool isKeyPressed, int midiNoteValue);
@@ -262,12 +266,14 @@ struct MIDIKeyboard
 void MIDIKeyboard::outputMIDIInfo(int midiNoteValue, int velocityValue)
 {
     midiNoteValue = 19;
-    velocityValue = 93;   
+    velocityValue = 93;
+    midiNoteRange += midiNoteValue;
+    midiVeloctiyRange += velocityValue;   
 }
 
 void MIDIKeyboard::diplayMIDINoteValue(bool isKeyPressed, int midiNoteValue)
 {
-    if(isKeyPressed == true)
+    if(isKeyPressed)
     {
         ledDisplay += midiNoteValue;
     }
@@ -275,7 +281,7 @@ void MIDIKeyboard::diplayMIDINoteValue(bool isKeyPressed, int midiNoteValue)
 
 void MIDIKeyboard::consumeElectricity(bool pluggedInToHost, float wattage)
 {
-    if(pluggedInToHost == true)
+    if(pluggedInToHost)
     {
         wattage = 10.4f;
     }
@@ -283,54 +289,57 @@ void MIDIKeyboard::consumeElectricity(bool pluggedInToHost, float wattage)
     {
         wattage = 0.0f;
     }
+    electricityPerDay += wattage;
 }
 
 // UDT 3 // complete
 
 struct HardwareSynthesiser
 {
-	int numFilters = 3;
+	float audioRange;
 	int numAudioOutputs = 2;
-	int amountWaveforms = 4;
-	int numLFOs = 1;
+	int amountWaveforms;
+	int numLFOs;
 	int numEnvelopes = 2;
-    float outputLevel; // new member variable for implementation 3 below
+    float outputLevel;
 
-	void generateAudioSignals(float maxOscFreq, int waveType);
+	auto generateAudioSignals(float maxOscFreq, int waveType);
 	void autoFilterAdjust(int freqRange, bool useLFO, bool useEnv1); 
 	void outputAudioSignals(bool keyHasBeenPressed, float maxOutput);
 };
 
-void HardwareSynthesiser::generateAudioSignals(float maxOscFreq, int waveType)
+auto HardwareSynthesiser::generateAudioSignals(float maxOscFreq = 5000.0f, int waveType = 1)
 {
-    maxOscFreq = 50000.0f;
-    waveType = 1;
+    audioRange += maxOscFreq;
+    amountWaveforms += waveType;
 }
 
 void HardwareSynthesiser::autoFilterAdjust(int freqRange, bool useLFO, bool useEnv1)
 {
-    if(useLFO == true)
+    if(useLFO)
     {
         freqRange = 200;
+        numLFOs = 1;
     }
     else
     {
         useEnv1 = true;
+        numEnvelopes = 1;
         freqRange = 300;
     }
 }
 
 void HardwareSynthesiser::outputAudioSignals(bool keyHasBeenPressed, float output)
 {
-    if(keyHasBeenPressed == true)
+    if(keyHasBeenPressed)
     {
         output = 24.0f;
     }
-   else 
-   {
+    else 
+    {
         output = 0.0f;
-   }
-   outputLevel += output;
+    }
+    outputLevel += output;
 }
 
 //UDT 4. // complete
@@ -351,20 +360,20 @@ struct HousePlant
 
 void HousePlant::useCarbonDioxide(float amountOfCarbonPerDay, bool isItDayTime)
 {
-    if(isItDayTime == true)
+    if(!isItDayTime)
     {
-        amountOfCarbonPerDay = 300.0f;
+        amountOfCarbonPerDay = 0.0f;
     }
     else
     {
-        amountOfCarbonPerDay = 0.0f;
+        amountOfCarbonPerDay = 300.0f;
     }
     COperday += amountOfCarbonPerDay;
 }
 
 void HousePlant::absorbWater(float amountOfWaterPerDay, bool didItRain)
 {
-    if(didItRain == true)
+    if(didItRain)
     {
         amountOfWaterPerDay = 1.2f;
     }
@@ -377,15 +386,15 @@ void HousePlant::absorbWater(float amountOfWaterPerDay, bool didItRain)
 
 void HousePlant::extendHeightPerDay(float growthPerDay, bool sunnyDay)
 {
-   if(sunnyDay == true)
-   {
+    if(sunnyDay)
+    {
        growthPerDay = 2.3f;
-   } 
-   else 
-   {
+    } 
+    else 
+    {
        growthPerDay = 1.1f;  
-   }
-   currentNumRoots += 1;
+    }
+    currentNumRoots += 1;
 }
 
 // UDT 5 // complete
@@ -408,7 +417,7 @@ struct WaveformDisplay
 
 void WaveformDisplay::transientPositions(bool bpmOn, float quarterSubdivision, int bpmValue = 120)
 {
-    if(bpmOn == true)
+    if(bpmOn)
     {
         quarterSubdivision = 60 / bpmValue;
     }
@@ -422,7 +431,7 @@ void WaveformDisplay::playbackHeadPos(float samplePos)
 
 void WaveformDisplay::loopPoints(float startPos, float endPos, bool isLoopFunctionOn)
 {
-    if(isLoopFunctionOn == true)
+    if(isLoopFunctionOn)
     {
         loopHighlightColour = "Orange";
     }
@@ -465,7 +474,7 @@ void GlobalSettings::changeAmp(double gainLevelChange = 2)
 
 void GlobalSettings::panAudio(bool sampleIsStereo, bool outputStereo, int changePanPosition = 0)
 {
-    if(sampleIsStereo == true)
+    if(sampleIsStereo)
     {
         outputStereo = true;
     }
@@ -479,14 +488,7 @@ void GlobalSettings::panAudio(bool sampleIsStereo, bool outputStereo, int change
 
 void GlobalSettings::transposeAudio(int changePitch = 2)
 {
-    if(changePitch > 0)
-    {
-        transpose += changePitch;
-    }
-    else 
-    {
-        transpose -= changePitch;
-    }
+    transpose += changePitch;
 }
 
 // UDT 7 // complete
@@ -506,6 +508,7 @@ struct Filter
         int slope = 24;
         float selfOscAmount;
         bool isEmulationOn = true;
+        std::string m_ClipType;
 
         void internallyFeedback(float feedbackValue);
         void clipAudio(std::string clipType);
@@ -513,7 +516,7 @@ struct Filter
     };
 
     void freqContentAffected(double lowFreq, double highFreq, double freqCutoffChange);
-    void distFreqContent(bool distTurnedUp, float distortionAmount, int driveAmount);
+    auto distFreqContent(bool distTurnedUp, float distortionAmount, int driveAmount);
     void midiNoteToCutoff(int midiNoteValue, int keyTrackerAmount);
 
     CircuitTypeEmulator circuitTypeSelected;
@@ -527,14 +530,14 @@ void Filter::CircuitTypeEmulator::internallyFeedback(float feedbackValue)
     }
 }
 
-void Filter::CircuitTypeEmulator::clipAudio(std::string clipType)
+void Filter::CircuitTypeEmulator::clipAudio(std::string clipType = "Soft")
 {
-    clipType = "Soft";
+    m_ClipType += clipType;
 }
 
 void Filter::CircuitTypeEmulator::manipulatePhase(bool isLinearPhase)
 {
-    if(isLinearPhase == true)
+    if(!isLinearPhase)
     {
         slope = 24;
     }
@@ -552,7 +555,7 @@ void Filter::freqContentAffected(double lowFreq, double highFreq, double freqCut
     freqCutoff += freqCutoffChange;
 }
 
-void Filter::distFreqContent(bool distTurnedUp, float distortionAmount, int driveAmount)
+auto Filter::distFreqContent(bool distTurnedUp, float distortionAmount, int driveAmount)
 {
     distTurnedUp = true;
     distortionAmount = 1.1f;
@@ -582,7 +585,7 @@ struct Envelope
 
 void Envelope::controlAmpOverTime(bool ampEnvSelected, bool isKeyPressed, float maxValueAmp)
 {
-    if(isKeyPressed == true && ampEnvSelected == true)
+    if(isKeyPressed && ampEnvSelected)
     {
         maxValueAmp = midiVelLevel / 100;
     }
@@ -594,7 +597,7 @@ void Envelope::controlAmpOverTime(bool ampEnvSelected, bool isKeyPressed, float 
 
 void Envelope::controlCutoffOverTime(bool filterEnvSelected, bool isKeyPressed, double maxValueFilter)
 {
-    if(isKeyPressed == true && filterEnvSelected == true)
+    if(isKeyPressed && filterEnvSelected)
     {
         maxValueFilter = midiVelLevel * 10;
     }
@@ -606,7 +609,7 @@ void Envelope::controlCutoffOverTime(bool filterEnvSelected, bool isKeyPressed, 
 
 void Envelope::controlPitchOverTime(bool pitchEnvSelected, bool isKeyPressed, double maxValuePitch)
 {
-    if(isKeyPressed == true && pitchEnvSelected == true)
+    if(isKeyPressed && pitchEnvSelected)
     {
         maxValuePitch = 24 / 100 * midiVelLevel;
     }
@@ -632,7 +635,7 @@ struct LFO
 
 void LFO::modAmpOfSample(bool lfoON, int ampRange, bool ampToggle = true)
 {
-    if(lfoON == true && ampToggle == true)
+    if(lfoON && ampToggle)
     {
         ampRange = 1;
     }
@@ -645,7 +648,7 @@ void LFO::modAmpOfSample(bool lfoON, int ampRange, bool ampToggle = true)
 
 void LFO::modPitchOfSample(bool lfoON, int pitchRange, bool pitchToggle = true)
 {
-    if(lfoON == true && pitchToggle == true)
+    if(lfoON && pitchToggle)
     {
         pitchRange = 24;
     }
@@ -658,7 +661,7 @@ void LFO::modPitchOfSample(bool lfoON, int pitchRange, bool pitchToggle = true)
 
 void LFO::modPanOfSample(bool lfoON, int panRange, bool panToggle = true)
 {
-    if(lfoON == true && panToggle == true)
+    if(lfoON && panToggle)
     {
         panRange = 100;
     }
@@ -678,26 +681,28 @@ struct VSTSampler
     Filter filter;
     Envelope envelope;
     LFO lfo;
-    WaveformDisplay leftChannel; // added these while attempting to use functions  
-    WaveformDisplay rightChannel; // from other structs.
-    int numberOfIndividualSamples; // summation of individual sample snapshots.
+    WaveformDisplay leftChannel;   
+    WaveformDisplay rightChannel;
+    bool displayAWaveform; 
+    int numberOfIndividualSamples;
+    bool normalSpeed; 
 
-    void displayVisualWaveform(bool isSampleLoaded, bool displayAWaveform);
-    void playbackSpeed(bool warpOff, bool normalSpeed);
+    void displayVisualWaveform(bool isSampleLoaded);
+    void playbackSpeed(bool warpOff);
     void playbackSamples(bool stereoSampleLoaded);
 };
 
-void VSTSampler::displayVisualWaveform(bool isSampleLoaded, bool displayAWaveform)
+void VSTSampler::displayVisualWaveform(bool isSampleLoaded)
 {
-    if(isSampleLoaded == true)
+    if(isSampleLoaded)
     {
         displayAWaveform = true;
     }
 }
 
-void VSTSampler::playbackSpeed(bool warpOff, bool normalSpeed)
+void VSTSampler::playbackSpeed(bool warpOff)
 {
-    if(warpOff == true)
+    if(warpOff)
     {
         normalSpeed = true;
     }
@@ -709,7 +714,7 @@ void VSTSampler::playbackSpeed(bool warpOff, bool normalSpeed)
 
 void VSTSampler::playbackSamples(bool stereoSampleLoaded) // uses member functions from WaveformDisplay struct. This implementation adds sample snapshots together depending on stereo/mono
 {
-    if(stereoSampleLoaded == true)
+    if(stereoSampleLoaded)
     {
         leftChannel.playForward();
         rightChannel.playForward();
