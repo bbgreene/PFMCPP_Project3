@@ -77,10 +77,10 @@ Laptop::Laptop(){}
 
 void Laptop::User::turnOnLaptop(bool laptopOff, bool userPressedPowerButton)
 {
-   if(laptopOff && userPressedPowerButton)
-   {
-       numPowerOnPerday += 1;
-   }
+    if(laptopOff && userPressedPowerButton)
+    {
+        numPowerOnPerday += 1;
+    }
 }
 
 auto Laptop::User::sendEmails(bool personalEmails, int emailsPerDay)
@@ -202,7 +202,7 @@ HardwareSynthesiser::HardwareSynthesiser(){}
 
 void HardwareSynthesiser::generateAudioSignals()
 {
-   std::cout << "The current output level is " << outputLevel << std::endl;
+    std::cout << "The current output level is " << outputLevel << std::endl;
 }
 
 void HardwareSynthesiser::autoFilterAdjust(bool useLFO)
@@ -464,8 +464,8 @@ void Filter::CircuitTypeEmulator::manipulatePhase(bool isLinearPhase)
 
 void Filter::freqContentAffected(bool filterTurnedOn)
 {
-   if(filterTurnedOn)
-   std::cout << "The frequency content affected is 0 to " << freqCutoff << " Hz" << std::endl;
+    if(filterTurnedOn)
+        std::cout << "The frequency content affected is 0 to " << freqCutoff << " Hz" << std::endl;
 }
 
 auto Filter::distFreqContent(bool distTurnedUp, float distortionAmount, int driveAmount)
