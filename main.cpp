@@ -44,11 +44,11 @@ int main()
 
 struct Laptop
 {
-    int numLetterKeys;
-    int numNumericKeys;
-    float binaryInfoInHardDisk;
-    int numUSBPorts;
-    float electricityForPortableUse;
+    int numLetterKeys { 26 };
+    int numNumericKeys { 10 };
+    float binaryInfoInHardDisk { 499.96f };
+    int numUSBPorts { 2 };
+    float electricityForPortableUse { 39.0f };
     Laptop();
 
     struct User
@@ -73,21 +73,14 @@ struct Laptop
     User userAdmin;
 };
 
-Laptop::Laptop()
-{
-    numLetterKeys = 26;
-    numNumericKeys = 10;
-    binaryInfoInHardDisk = 499.96f;
-    numUSBPorts = 2;
-    electricityForPortableUse = 58.2f;
-}
+Laptop::Laptop(){}
 
 void Laptop::User::turnOnLaptop(bool laptopOff, bool userPressedPowerButton)
 {
-   if(laptopOff && userPressedPowerButton)
-   {
-       numPowerOnPerday += 1;
-   }
+    if(laptopOff && userPressedPowerButton)
+    {
+        numPowerOnPerday += 1;
+    }
 }
 
 auto Laptop::User::sendEmails(bool personalEmails, int emailsPerDay)
@@ -139,7 +132,7 @@ struct MIDIKeyboard
 {
     int numWhiteKeys;
     int numBlackKeys;
-    float electricityPerDay;
+    float wattage;
     int midiVeloctiyRange;
     int midiNotesAvailable;
     int ledDisplay;
@@ -147,17 +140,18 @@ struct MIDIKeyboard
 
     void outputMIDIInfo();
     void diplayMIDINoteValue(bool isKeyPressed, int midiNoteValue);
-    void consumeElectricity(bool pluggedInToHost, float wattage);
+    void consumeElectricity(bool pluggedInToHost);
 };
 
-MIDIKeyboard::MIDIKeyboard()
+MIDIKeyboard::MIDIKeyboard() :
+numWhiteKeys(52),
+numBlackKeys(36),
+wattage(10.4f),
+midiVeloctiyRange(127),
+midiNotesAvailable(127),
+ledDisplay(0)
 {
-    numWhiteKeys = 52;
-    numBlackKeys = 36;
-    electricityPerDay = 0.0f;
-    midiVeloctiyRange = 127;
-    midiNotesAvailable = 127;
-    ledDisplay = 0;
+
 }
 
 void MIDIKeyboard::outputMIDIInfo()
@@ -173,62 +167,53 @@ void MIDIKeyboard::diplayMIDINoteValue(bool isKeyPressed, int midiNoteValue)
     }
 }
 
-void MIDIKeyboard::consumeElectricity(bool pluggedInToHost, float wattage)
+void MIDIKeyboard::consumeElectricity(bool pluggedInToHost)
 {
     if(pluggedInToHost)
     {
-        wattage = 10.4f;
+        std::cout << "This MIDI keyboard is plugged in and will use " << wattage << " watts per second." << std::endl;
     }
     else
     {
-        wattage = 0.0f;
+        std::cout << "MIDI keyboard is not plugged in." << std::endl;  
     }
-    electricityPerDay += wattage;
+     
+    
 }
 
 // UDT 3
 
 struct HardwareSynthesiser
 {
-	float audioRange;
-	int numAudioOutputs;
-	int amountWaveforms;
-	int numLFOs;
-	int numEnvelopes;
-    float outputLevel;
+	float audioRange { 5000.0f };
+    int numAudioOutputs { 2 };
+    int amountWaveforms { 3 };
+    std::string lfo { "LFO" };
+    std::string env { "Envelope" };
+    float outputLevel { 1.1f };
     HardwareSynthesiser();
 
 	void generateAudioSignals();
-	void autoFilterAdjust(int freqRange, bool useLFO, bool useEnv1); 
+	void autoFilterAdjust(bool useLFO); 
 	void outputAudioSignals(bool keyHasBeenPressed, float maxOutput);
 };
 
-HardwareSynthesiser::HardwareSynthesiser()
-{
-    audioRange = 5000.0f;
-    numAudioOutputs = 2;
-    amountWaveforms = 3;
-    numEnvelopes = 2;
-    outputLevel = 1.1f;
-}
+HardwareSynthesiser::HardwareSynthesiser(){}
 
 void HardwareSynthesiser::generateAudioSignals()
 {
-   std::cout << "The current output level is " << outputLevel << std::endl; 
+    std::cout << "The current output level is " << outputLevel << std::endl;
 }
 
-void HardwareSynthesiser::autoFilterAdjust(int freqRange, bool useLFO, bool useEnv1)
+void HardwareSynthesiser::autoFilterAdjust(bool useLFO)
 {
     if(useLFO)
     {
-        freqRange = 200;
-        numLFOs = 1;
+        std::cout << "The " << lfo << " is modulating the frequency cutoff. " << std::endl;
     }
     else
     {
-        useEnv1 = true;
-        numEnvelopes = 1;
-        freqRange = 300;
+        std::cout << "The " << env << " is modulating the frequency cutoff. " << std::endl;
     }
 }
 
@@ -258,16 +243,17 @@ struct HousePlant
 
     void transportWater();
     void absorbWater(float amountOfWaterPerDay, bool didItRain);
-    void extendHeightPerDay(float growthPerDay, bool sunnyDay);
+    void growthPerDay(bool sunnyDay);
 };
 
-HousePlant::HousePlant()
+HousePlant::HousePlant() :
+currentNumRoots(25),
+numLeaves(73),
+waterInRoots(1.2f),
+numFlowers(22),
+numLadybirdsPerDay(3)
 {
-    currentNumRoots = 25;
-    numLeaves = 73;
-    waterInRoots = 1.2f;
-    numFlowers = 22;
-    numLadybirdsPerDay = 3;
+
 }
 
 void HousePlant::transportWater()
@@ -288,17 +274,17 @@ void HousePlant::absorbWater(float amountOfWaterPerDay, bool didItRain)
     waterInRoots += amountOfWaterPerDay;
 }
 
-void HousePlant::extendHeightPerDay(float growthPerDay, bool sunnyDay)
+void HousePlant::growthPerDay(bool sunnyDay)
 {
     if(sunnyDay)
     {
-       growthPerDay = 2.3f;
+        numFlowers += 1;
+        std::cout << "The amount of flowers is " << numFlowers << std::endl;
     } 
     else 
     {
-       growthPerDay = 1.1f;  
+        std::cout << "The amount of flowers is " << numFlowers << std::endl;  
     }
-    currentNumRoots += 1;
 }
 
 // UDT 5 
@@ -478,8 +464,8 @@ void Filter::CircuitTypeEmulator::manipulatePhase(bool isLinearPhase)
 
 void Filter::freqContentAffected(bool filterTurnedOn)
 {
-   if(filterTurnedOn)
-   std::cout << "The frequency content affected is 0 to " << freqCutoff << " Hz" << std::endl;
+    if(filterTurnedOn)
+        std::cout << "The frequency content affected is 0 to " << freqCutoff << " Hz" << std::endl;
 }
 
 auto Filter::distFreqContent(bool distTurnedUp, float distortionAmount, int driveAmount)
@@ -683,16 +669,19 @@ int main()
 
     MIDIKeyboard novation;
     novation.outputMIDIInfo();
+    novation.consumeElectricity(false);
 
     std::cout << "The number of whites keys plus the number is black keys is " << novation.numWhiteKeys + novation.numBlackKeys << std::endl;
 
     HardwareSynthesiser moog;
     moog.generateAudioSignals();
+    moog.autoFilterAdjust(false);
 
     std::cout << "The number of outputs available is " << moog.numAudioOutputs << std::endl; 
 
     HousePlant swissCheese;
     swissCheese.transportWater();
+    swissCheese.growthPerDay(false);
 
     std::cout << "Amount of water in the roots is " << swissCheese.waterInRoots << " litres" << std::endl;
 
