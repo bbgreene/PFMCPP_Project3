@@ -204,9 +204,7 @@ void MIDIKeyboard::consumeElectricity(bool pluggedInToHost)
     else
     {
         std::cout << "MIDI keyboard is not plugged in." << std::endl;  
-    }
-     
-    
+    } 
 }
 
 // UDT 3
@@ -272,6 +270,7 @@ struct HousePlant
     void transportWater();
     void absorbWater(float amountOfWaterPerDay, bool didItRain);
     void growthPerDay(bool sunnyDay);
+    int addLeaves(int fertiliserThres);
 };
 
 HousePlant::HousePlant() :
@@ -314,6 +313,24 @@ void HousePlant::growthPerDay(bool sunnyDay)
         std::cout << "The amount of flowers is " << numFlowers << std::endl;  
     }
 }
+
+int HousePlant::addLeaves(int fertiliserThres)
+{
+    int amountOfLeavesToBeAdded {0};
+
+    while(amountOfLeavesToBeAdded < fertiliserThres)
+    {
+        amountOfLeavesToBeAdded += 1;
+        
+        if(amountOfLeavesToBeAdded >= 2)
+        {
+            std::cout << "More than 1 leaf has been grown" << std::endl;
+            break;    
+        } 
+    }
+    return amountOfLeavesToBeAdded;
+}
+
 
 // UDT 5 
 
@@ -523,6 +540,7 @@ struct Envelope
     void addAttackToAmp();
     void controlCutoffOverTime(bool filterEnvSelected, bool isKeyPressed, double maxValueFilter);
     void controlPitchOverTime(bool pitchEnvSelected, bool isKeyPressed, double maxValuePitch);
+    float looping(float envLoopThres);
 };
 
 Envelope::Envelope()
@@ -562,6 +580,23 @@ void Envelope::controlPitchOverTime(bool pitchEnvSelected, bool isKeyPressed, do
         maxValuePitch = 0;
     }
 }
+
+float Envelope::looping(float envLoopThres)
+{
+    float looplength {0.0f};
+
+    while(looplength < envLoopThres)
+    {
+        looplength += 0.1f;
+        
+        if(looplength >= 1.0f)
+        {
+            std::cout << looplength << " sec(s): The envelope is not looping" << std::endl;
+            break;    
+        } 
+    }
+    return looplength;
+}
 // UDT 9 
 
 struct LFO
@@ -576,6 +611,7 @@ struct LFO
     void modAmpOfSample();
     void modPitchOfSample(bool lfoON, int pitchRange, bool pitchToggle);
     void modPanOfSample(bool lfoON, int panRange, bool panToggle);
+    float createSidebands(float sidebandThres);
 };
 
 LFO::LFO()
@@ -616,6 +652,23 @@ void LFO::modPanOfSample(bool lfoON, int panRange, bool panToggle = true)
         panRange = 0;
     }
     modDest += 2;
+}
+
+float LFO::createSidebands(float sidebandThres)
+{
+    float currentRate {0.0f};
+
+    while(currentRate < sidebandThres)
+    {
+        currentRate += 0.1f;
+        
+        if(currentRate >= 15.0f)
+        {
+            std::cout << currentRate << " Hz: The modulation is now synthesising sidebands!" << std::endl;
+            break;    
+        } 
+    }
+    return currentRate;
 }
 
 // UDT 10 
@@ -710,7 +763,10 @@ int main()
     HousePlant swissCheese;
     swissCheese.transportWater();
     swissCheese.growthPerDay(false);
+    auto leavesAdded = swissCheese.addLeaves(2);
 
+    std::cout << leavesAdded << " leaves have been added " << std::endl;
+    std::cout << "The plant now has " << leavesAdded + swissCheese.numLeaves << " leaves" << std::endl;
     std::cout << "Amount of water in the roots is " << swissCheese.waterInRoots << " litres" << std::endl;
 
     WaveformDisplay main;
@@ -730,11 +786,18 @@ int main()
 
     Envelope firstEnvelope;
     firstEnvelope.addAttackToAmp();
+    auto loopingFunction = firstEnvelope.looping(0.5f);
+
+    std::cout << "A looping value above " << loopingFunction << " sec(s) does not loop" << std::endl;
 
     std::cout << "Does the audio reach full amplitude immdetiately? " << (firstEnvelope.attTime < 0.1f ? "Yes" : "No") << std::endl;
 
+
     LFO myLFO;
     myLFO.modAmpOfSample();
+    auto modulationRate = myLFO.createSidebands(16.0f);
+
+    std::cout << "The current modulating rate is: " << modulationRate << " Hz" << std::endl;
     
     std::cout << "The current modulating waveform is: " << myLFO.waveform << std::endl;
 
