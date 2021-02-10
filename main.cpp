@@ -265,6 +265,7 @@ struct HousePlant
     float waterInRoots;
     int numFlowers;
     int numLadybirdsPerDay;
+    int potentialLeafGrowthPerDay;
     HousePlant();
 
     void transportWater();
@@ -278,7 +279,8 @@ currentNumRoots(25),
 numLeaves(73),
 waterInRoots(1.2f),
 numFlowers(22),
-numLadybirdsPerDay(3)
+numLadybirdsPerDay(3),
+potentialLeafGrowthPerDay(0)
 {
 
 }
@@ -316,19 +318,15 @@ void HousePlant::growthPerDay(bool sunnyDay)
 
 int HousePlant::addLeaves(int fertiliserThres)
 {
-    int amountOfLeavesToBeAdded {0};
-
-    while(amountOfLeavesToBeAdded < fertiliserThres)
-    {
-        amountOfLeavesToBeAdded += 1;
-        
-        if(amountOfLeavesToBeAdded >= 2)
+    for(potentialLeafGrowthPerDay = 0; potentialLeafGrowthPerDay < fertiliserThres; potentialLeafGrowthPerDay += 1)
+    {   
+        if(potentialLeafGrowthPerDay >= 3)
         {
             std::cout << "More than 1 leaf has been grown" << std::endl;
             break;    
         } 
     }
-    return amountOfLeavesToBeAdded;
+    return potentialLeafGrowthPerDay;
 }
 
 
@@ -763,7 +761,7 @@ int main()
     HousePlant swissCheese;
     swissCheese.transportWater();
     swissCheese.growthPerDay(false);
-    auto leavesAdded = swissCheese.addLeaves(2);
+    auto leavesAdded = swissCheese.addLeaves(3);
 
     std::cout << leavesAdded << " leaves have been added " << std::endl;
     std::cout << "The plant now has " << leavesAdded + swissCheese.numLeaves << " leaves" << std::endl;
